@@ -1,4 +1,5 @@
-const quizzes = {
+window.onload = function () {
+  const quizzes = {
   "Movers and Shakers": [
     { q: "What is a “significant” person?", a: ["A person who is very funny", "A person who is important and made changes", "A person who is good at maths", "A person who owns a shop"], correct: 1 },
     { q: "What did Joseph Lister help stop in hospitals?", a: ["People getting bored", "Long waits", "Infections", "Loud noises"], correct: 2 },
@@ -181,94 +182,93 @@ const quizzes = {
     { q: "What is a plantation?", a: ["Type of ship", "Trade fort", "Farm for crops like sugar", "Place where enslaved people were freed"], correct: 2 }
   ]
 };
-const app = document.getElementById("app");
-const mainMenu = document.getElementById("main-menu");
-const quizScreen = document.getElementById("quiz-screen");
-const scoreScreen = document.getElementById("score-screen");
-const quizList = document.getElementById("quiz-list");
-const quizTitle = document.getElementById("quiz-title");
-const questionText = document.getElementById("question-text");
-const answerButtons = document.getElementById("answer-buttons");
-const feedback = document.getElementById("feedback");
-const finalScore = document.getElementById("final-score");
-const retakeBtn = document.getElementById("retake-btn");
-const menuBtn = document.getElementById("menu-btn");
+  const app = document.getElementById("app");
+  const mainMenu = document.getElementById("main-menu");
+  const quizScreen = document.getElementById("quiz-screen");
+  const scoreScreen = document.getElementById("score-screen");
+  const quizList = document.getElementById("quiz-list");
+  const quizTitle = document.getElementById("quiz-title");
+  const questionText = document.getElementById("question-text");
+  const answerButtons = document.getElementById("answer-buttons");
+  const feedback = document.getElementById("feedback");
+  const finalScore = document.getElementById("final-score");
+  const retakeBtn = document.getElementById("retake-btn");
+  const menuBtn = document.getElementById("menu-btn");
 
-let currentQuiz = [];
-let currentTitle = "";
-let currentQuestion = 0;
-let score = 0;
+  let currentQuiz = [];
+  let currentTitle = "";
+  let currentQuestion = 0;
+  let score = 0;
 
-function showScreen(screen) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
-  screen.classList.remove("hidden");
-}
-
-function loadMainMenu() {
-  quizList.innerHTML = "";
-  Object.keys(quizzes).forEach(title => {
-    const btn = document.createElement("button");
-    btn.textContent = title;
-    btn.setAttribute("type", "button");
-    btn.addEventListener("click", () => startQuiz(title));
-    quizList.appendChild(btn);
-  });
-  showScreen(mainMenu);
-}
-
-function startQuiz(title) {
-  currentQuiz = quizzes[title];
-  currentTitle = title;
-  currentQuestion = 0;
-  score = 0;
-  quizTitle.textContent = title;
-  showScreen(quizScreen);
-  showQuestion();
-}
-
-function showQuestion() {
-  const question = currentQuiz[currentQuestion];
-  questionText.textContent = question.q;
-  answerButtons.innerHTML = "";
-  feedback.classList.add("hidden");
-
-  question.a.forEach((answer, index) => {
-    const btn = document.createElement("button");
-    btn.textContent = answer;
-    btn.onclick = () => checkAnswer(index);
-    answerButtons.appendChild(btn);
-  });
-}
-
-function checkAnswer(selected) {
-  const correctIndex = currentQuiz[currentQuestion].correct;
-  feedback.classList.remove("hidden");
-  if (selected === correctIndex) {
-    feedback.textContent = "✅ Correct!";
-    score++;
-  } else {
-    feedback.textContent = `❌ Wrong! The correct answer was: ${currentQuiz[currentQuestion].a[correctIndex]}`;
+  function showScreen(screen) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+    screen.classList.remove("hidden");
   }
 
-  setTimeout(() => {
-    currentQuestion++;
-    if (currentQuestion < currentQuiz.length) {
-      showQuestion();
+  function loadMainMenu() {
+    quizList.innerHTML = "";
+    Object.keys(quizzes).forEach(title => {
+      const btn = document.createElement("button");
+      btn.textContent = title;
+      btn.setAttribute("type", "button");
+      btn.addEventListener("click", () => startQuiz(title));
+      quizList.appendChild(btn);
+    });
+    showScreen(mainMenu);
+  }
+
+  function startQuiz(title) {
+    currentQuiz = quizzes[title];
+    currentTitle = title;
+    currentQuestion = 0;
+    score = 0;
+    quizTitle.textContent = title;
+    showScreen(quizScreen);
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const question = currentQuiz[currentQuestion];
+    questionText.textContent = question.q;
+    answerButtons.innerHTML = "";
+    feedback.classList.add("hidden");
+
+    question.a.forEach((answer, index) => {
+      const btn = document.createElement("button");
+      btn.textContent = answer;
+      btn.onclick = () => checkAnswer(index);
+      answerButtons.appendChild(btn);
+    });
+  }
+
+  function checkAnswer(selected) {
+    const correctIndex = currentQuiz[currentQuestion].correct;
+    feedback.classList.remove("hidden");
+    if (selected === correctIndex) {
+      feedback.textContent = "✅ Correct!";
+      score++;
     } else {
-      showFinalScore();
+      feedback.textContent = `❌ Wrong! The correct answer was: ${currentQuiz[currentQuestion].a[correctIndex]}`;
     }
-  }, 2000);
-}
 
-function showFinalScore() {
-  finalScore.textContent = `You scored ${score} out of ${currentQuiz.length}!`;
-  showScreen(scoreScreen);
-}
+    setTimeout(() => {
+      currentQuestion++;
+      if (currentQuestion < currentQuiz.length) {
+        showQuestion();
+      } else {
+        showFinalScore();
+      }
+    }, 2000);
+  }
 
-retakeBtn.addEventListener("click", () => startQuiz(currentTitle));
-menuBtn.addEventListener("click", loadMainMenu);
+  function showFinalScore() {
+    finalScore.textContent = `You scored ${score} out of ${currentQuiz.length}!`;
+    showScreen(scoreScreen);
+  }
 
-// ✅ THIS is key: only run after DOM is fully ready
-document.addEventListener("DOMContentLoaded", () => {
+  retakeBtn.addEventListener("click", () => startQuiz(currentTitle));
+  menuBtn.addEventListener("click", loadMainMenu);
+
+  // 👇 Load the quiz menu right after the page finishes loading
   loadMainMenu();
-});
+};
