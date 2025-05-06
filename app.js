@@ -208,12 +208,13 @@ function showScreen(screen) {
 
 function loadMainMenu() {
   quizList.innerHTML = "";
-  Object.keys(quizzes).forEach(title => {
+  for (const title of Object.keys(quizzes)) {
     const btn = document.createElement("button");
     btn.textContent = title;
-    btn.onclick = () => startQuiz(title);
+    btn.setAttribute("type", "button"); // prevents accidental form behavior
+    btn.addEventListener("click", () => startQuiz(title)); // this is key
     quizList.appendChild(btn);
-  });
+  }
   showScreen(mainMenu);
 }
 
