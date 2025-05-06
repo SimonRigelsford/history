@@ -1,5 +1,3 @@
-// app.js
-
 const quizzes = {
   "Movers and Shakers": [
     { q: "What is a “significant” person?", a: ["A person who is very funny", "A person who is important and made changes", "A person who is good at maths", "A person who owns a shop"], correct: 1 },
@@ -208,13 +206,13 @@ function showScreen(screen) {
 
 function loadMainMenu() {
   quizList.innerHTML = "";
-  for (const title of Object.keys(quizzes)) {
+  Object.keys(quizzes).forEach(title => {
     const btn = document.createElement("button");
     btn.textContent = title;
-    btn.setAttribute("type", "button"); // prevents accidental form behavior
-    btn.addEventListener("click", () => startQuiz(title)); // this is key
+    btn.setAttribute("type", "button");
+    btn.addEventListener("click", () => startQuiz(title));
     quizList.appendChild(btn);
-  }
+  });
   showScreen(mainMenu);
 }
 
@@ -267,10 +265,10 @@ function showFinalScore() {
   showScreen(scoreScreen);
 }
 
-retakeBtn.onclick = () => startQuiz(currentTitle);
-menuBtn.onclick = loadMainMenu;
+retakeBtn.addEventListener("click", () => startQuiz(currentTitle));
+menuBtn.addEventListener("click", loadMainMenu);
 
-window.onload = function () {
+// ✅ THIS is key: only run after DOM is fully ready
+document.addEventListener("DOMContentLoaded", () => {
   loadMainMenu();
-};
-
+});
