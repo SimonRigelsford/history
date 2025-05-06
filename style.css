@@ -1,5 +1,10 @@
 /* style.css */
 
+
+#main-menu {
+  display: block !important;
+}
+
 body {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   background-color: #f0f8ff;
