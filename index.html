@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz App for Kids</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen">
+      <h1>✨ Choose a Quiz ✨</h1>
+      <div id="quiz-list"></div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="screen hidden">
+      <h2 id="quiz-title"></h2>
+      <div id="question-container">
+        <p id="question-text"></p>
+        <div id="answer-buttons"></div>
+      </div>
+      <div id="feedback" class="hidden"></div>
+    </div>
+
+    <!-- Final Score Screen -->
+    <div id="score-screen" class="screen hidden">
+      <h2>🎉 Quiz Complete! 🎉</h2>
+      <p id="final-score"></p>
+      <button id="retake-btn">🔁 Retake Quiz</button>
+      <button id="menu-btn">🏠 Return to Main Menu</button>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
