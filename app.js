@@ -270,5 +270,7 @@ function showFinalScore() {
 retakeBtn.onclick = () => startQuiz(currentTitle);
 menuBtn.onclick = loadMainMenu;
 
-// Start app
-loadMainMenu();
+window.onload = function () {
+  loadMainMenu();
+};
+
