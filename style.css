@@ -1,5 +1,12 @@
 /* style.css */
 
+#quiz-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
 
 #main-menu {
   display: block !important;
