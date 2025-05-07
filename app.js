@@ -206,95 +206,123 @@ const quizzes = {
     { q: "What is a plantation?", a: ["Type of ship", "Trade fort", "Farm for crops like sugar", "Place where enslaved people were freed"], correct: 2 }
   ]
 };
+
 // Initialize variables
 let currentQuiz = null;
 let currentQuestion = 0;
 let score = 0;
 
-// Function to load all quizzes
+// Load all quizzes dynamically
 function loadQuizzes() {
     const quizList = document.getElementById("quiz-list");
-    quizList.innerHTML = ""; // Clear any previous content
+    quizList.innerHTML = "";
     try {
-        // Iterate over each quiz name and create a button for it
         Object.keys(quizzes).forEach((quizName) => {
             const button = document.createElement("button");
+            button.classList.add("quiz-button");
             button.textContent = quizName;
             button.onclick = () => startQuiz(quizName);
             quizList.appendChild(button);
         });
-        console.log("Loaded quizzes:", Object.keys(quizzes)); // Debugging log
+        console.log("Loaded quizzes:", Object.keys(quizzes));
     } catch (error) {
         console.error("Error loading quizzes:", error);
     }
 }
 
-// Function to start a quiz when a quiz name button is clicked
+// Start a selected quiz
 function startQuiz(name) {
-    currentQuiz = quizzes[name]; // Get the selected quiz
+    currentQuiz = quizzes[name];
     currentQuestion = 0;
     score = 0;
-    document.getElementById("quiz-title").textContent = name; // Display quiz title
-    document.getElementById("quiz-list").style.display = "none"; // Hide quiz list
-    document.getElementById("quiz-container").style.display = "block"; // Show quiz container
+    document.getElementById("quiz-title").textContent = name;
+    document.getElementById("quiz-list").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
+    document.getElementById("restart-button").style.display = "none"; // Hide restart button
+    updateProgress();
     showQuestion();
 }
 
-// Function to display a question and its answer options
+// Display the current question and answers
 function showQuestion() {
-    const questionObj = currentQuiz[currentQuestion]; // Get current question object
-    document.getElementById("question").textContent = questionObj.q; // Display question text
+    const questionObj = currentQuiz[currentQuestion];
+    document.getElementById("question").textContent = questionObj.q;
     const answersDiv = document.getElementById("answers");
-    answersDiv.innerHTML = ""; // Clear previous answers
+    answersDiv.innerHTML = "";
 
-    // Create answer buttons dynamically
     questionObj.a.forEach((answer, index) => {
         const button = document.createElement("button");
+        button.classList.add("answer-button");
         button.textContent = answer;
-        button.onclick = () => checkAnswer(index);
+        button.onclick = () => checkAnswer(index, button);
         answersDiv.appendChild(button);
     });
+
+    updateProgress(); // Update progress bar for each question
 }
 
-// Function to check if the selected answer is correct
-function checkAnswer(selected) {
-    const correct = currentQuiz[currentQuestion].correct; // Get correct answer index
+// Check if the selected answer is correct
+function checkAnswer(selected, button) {
+    const correct = currentQuiz[currentQuestion].correct;
     const feedback = document.getElementById("feedback");
+    const buttons = document.querySelectorAll("#answers button");
 
-    // Update feedback based on whether the answer was correct
+    // Disable all answer buttons after selection
+    buttons.forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === correct) {
+            btn.classList.add("correct");
+        } else if (index === selected) {
+            btn.classList.add("incorrect");
+        }
+    });
+
+    // Update feedback message
     if (selected === correct) {
         score++;
         feedback.textContent = "Correct!";
-        feedback.style.color = "green";
     } else {
         feedback.textContent = `Wrong! Correct answer: ${currentQuiz[currentQuestion].a[correct]}`;
-        feedback.style.color = "red";
     }
+
+    updateProgress(); // Update progress after answering
 }
 
-// Function to move to the next question or end the quiz
+// Move to the next question or end the quiz
 function nextQuestion() {
-    currentQuestion++; // Increment the question index
+    currentQuestion++;
     const feedback = document.getElementById("feedback");
 
-    // Check if there are more questions
     if (currentQuestion < currentQuiz.length) {
-        feedback.textContent = ""; // Clear feedback
-        showQuestion(); // Show next question
-    } else {
-        // Display final score
         feedback.textContent = "";
-        document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
-        
-        // Return to the quiz list after a delay
-        setTimeout(() => {
-            document.getElementById("quiz-container").style.display = "none";
-            document.getElementById("quiz-list").style.display = "block";
-            document.getElementById("score").textContent = "";
-        }, 3000); // Display the score for 3 seconds
+        showQuestion();
+    } else {
+        // Show the final score and restart option
+        feedback.textContent = "";
+        if (score === currentQuiz.length) {
+            document.getElementById("score").textContent = `Perfect! You scored ${score} / ${currentQuiz.length}! 🎉`;
+        } else {
+            document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
+        }
+        document.getElementById("restart-button").style.display = "block";
     }
 }
 
-// Run the function to load quizzes when the window loads
-window.onload = loadQuizzes;
+// Restart the current quiz
+function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById("score").textContent = "";
+    document.getElementById("restart-button").style.display = "none"; // Hide restart button
+    startQuiz(currentQuiz);
+}
 
+// Update the progress bar
+function updateProgress() {
+    const progress = ((currentQuestion + 1) / currentQuiz.length) * 100;
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.style.width = progress + "%";
+}
+
+// Load quizzes when the window loads
+window.onload = loadQuizzes;
