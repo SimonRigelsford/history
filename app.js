@@ -24,12 +24,14 @@ let score = 0;
 
 function loadQuizzes() {
     const quizList = document.getElementById("quiz-list");
-    quizList.innerHTML = ""; // Clear previous content
+    quizList.innerHTML = ""; // Clear any previous content
     for (const quizName in quizzes) {
-        const button = document.createElement("button");
-        button.textContent = quizName;
-        button.onclick = () => startQuiz(quizName);
-        quizList.appendChild(button);
+        if (quizzes.hasOwnProperty(quizName)) { // Check if the property belongs to quizzes
+            const button = document.createElement("button");
+            button.textContent = quizName;
+            button.onclick = () => startQuiz(quizName);
+            quizList.appendChild(button);
+        }
     }
     console.log("Loaded quizzes:", Object.keys(quizzes)); // Debugging log
 }
