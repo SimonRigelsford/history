@@ -175,12 +175,7 @@ const quizzes = {
     { q: "Who was Claudia Jones?", a: ["Poet", "Queen", "Abolitionist", "Activist and founder of Notting Hill Carnival"], correct: 3 },
     { q: "What is a plantation?", a: ["Type of ship", "Trade fort", "Farm for crops like sugar", "Place where enslaved people were freed"], correct: 2 }
   ]
-};
 
-// app.js
-
-const quizzes = {
-  // (The entire quizzes object you uploaded goes here)
 };
 
 let currentQuiz = null;
