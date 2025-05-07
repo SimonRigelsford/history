@@ -188,12 +188,16 @@ let score = 0;
 
 function loadQuizzes() {
     const quizList = document.getElementById("quiz-list");
-    for (const quizName in quizzes) {
+function loadQuizzes() {
+    const quizList = document.getElementById("quiz-list");
+    quizList.innerHTML = ""; // Clear previous list
+    Object.keys(quizzes).forEach((quizName) => {
         const button = document.createElement("button");
         button.textContent = quizName;
         button.onclick = () => startQuiz(quizName);
         quizList.appendChild(button);
-    }
+    });
+}
 }
 
 function startQuiz(name) {
