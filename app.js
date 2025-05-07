@@ -91,7 +91,7 @@ const quizzes = {
     { q: "Which civilisation had flushing toilets and drains?", a: ["Ancient Egypt", "Ancient Sumer", "Indus Valley", "Roman Empire"], correct: 2 }
   ],
 
-"Invasion Knowledge": [
+"Invasion": [
     { q: "Who was the first King of all England?", a: ["Alfred the Great", "Athelstan", "Harold Godwinson", "William the Conqueror"], correct: 1 },
     { q: "Which groups tried to invade England soon after the Romans left in AD 410?", a: ["Normans", "Picts and Scots", "French", "Anglo-Saxons"], correct: 1 },
     { q: "Who invited Hengist and Horsa to England?", a: ["Alfred the Great", "Vortigern", "William the Conqueror", "Harold Godwinson"], correct: 1 },
