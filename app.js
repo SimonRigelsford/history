@@ -44,6 +44,7 @@ const quizzes = {
     { q: "What does it mean if someone is 'head of state'?", a: ["They are in charge of a classroom", "They represent the country", "They build houses", "They sell newspapers"], correct: 1 },
     { q: "What does a crown show?", a: ["You are rich", "You are tall", "You are royal and powerful", "You like gold"], correct: 2 }
   ],
+
   "Through the Ages": [
     { q: "What is prehistory?", a: ["A type of cave painting", "The time before people learned to talk", "The time before written records", "A story told by grandparents"], correct: 2 },
     { q: "What are the three main prehistoric ages called?", a: ["Old Age, Middle Age, New Age", "Stone Age, Bronze Age, Iron Age", "Cold Age, Fire Age, Water Age", "Cave Age, Stick Age, Rock Age"], correct: 1 },
@@ -89,6 +90,30 @@ const quizzes = {
     { q: "What game piece did the Indus Valley people invent?", a: ["Dominoes", "Dice", "Marbles", "Chess"], correct: 1 },
     { q: "Which civilisation had flushing toilets and drains?", a: ["Ancient Egypt", "Ancient Sumer", "Indus Valley", "Roman Empire"], correct: 2 }
   ],
+
+"Invasion Knowledge": [
+    { q: "Who was the first King of all England?", a: ["Alfred the Great", "Athelstan", "Harold Godwinson", "William the Conqueror"], correct: 1 },
+    { q: "Which groups tried to invade England soon after the Romans left in AD 410?", a: ["Normans", "Picts and Scots", "French", "Anglo-Saxons"], correct: 1 },
+    { q: "Who invited Hengist and Horsa to England?", a: ["Alfred the Great", "Vortigern", "William the Conqueror", "Harold Godwinson"], correct: 1 },
+    { q: "What happened to many towns after the Romans left Britannia?", a: ["They became prosperous", "They fell into disrepair", "They were built into castles", "They expanded rapidly"], correct: 1 },
+    { q: "What did the Anglo-Saxons do when they arrived in England?", a: ["Formed an empire", "Established seven kingdoms", "Built large fortresses", "Settled peacefully"], correct: 1 },
+    { q: "What were the main Viking activities in England?", a: ["Farming and trading", "Raiding and conquering", "Building castles", "Teaching Christianity"], correct: 1 },
+    { q: "What role did monks like St Columba and St Augustine play in Anglo-Saxon England?", a: ["They led armies", "They converted people to Christianity", "They resisted Viking invasions", "They ruled the kingdoms"], correct: 1 },
+    { q: "Which of the following is NOT a legacy of the Anglo-Saxons?", a: ["The English language", "Christianity", "Democracy", "Place names"], correct: 2 },
+    { q: "What was the significance of monasteries in Anglo-Saxon England?", a: ["They were centers of learning and Christianity", "They served as military bases", "They were places for royal ceremonies", "They stored weapons"], correct: 0 },
+    { q: "What was Danegeld?", a: ["A tax paid to Vikings for peace", "A religious ceremony", "A Viking trading system", "A form of currency"], correct: 0 },
+    { q: "Who led the Vikings during the Battle of Edington?", a: ["Alfred the Great", "Guthrum", "Harald Hardrada", "William the Conqueror"], correct: 1 },
+    { q: "What year did the Viking raid on Lindisfarne take place?", a: ["AD 865", "AD 793", "AD 1066", "AD 871"], correct: 1 },
+    { q: "What was the Great Heathen Army?", a: ["A large Viking invasion force", "A Roman legion", "An Anglo-Saxon militia", "A Christian missionary group"], correct: 0 },
+    { q: "Who won the Battle of Hastings in 1066?", a: ["Harold Godwinson", "Harald Hardrada", "William the Conqueror", "Athelstan"], correct: 2 },
+    { q: "What was the main goal of William the Conqueror after winning the Battle of Hastings?", a: ["To unite England under Norman rule", "To destroy all Viking settlements", "To convert England to paganism", "To ally with the Scots"], correct: 0 },
+    { q: "What event marked the end of Viking and Anglo-Saxon rule in England?", a: ["William the Conqueror’s victory at Hastings", "Alfred the Great’s defense of Wessex", "The Battle of Stamford Bridge", "The unification of England under Athelstan"], correct: 0 },
+    { q: "Which battle did Harold Godwinson win before facing William at Hastings?", a: ["Battle of Stamford Bridge", "Battle of Edington", "Battle of Lindisfarne", "Battle of York"], correct: 0 },
+    { q: "What title did William take after winning the Battle of Hastings?", a: ["William the Victorious", "William the Conqueror", "King of Normandy", "William the Invincible"], correct: 1 },
+    { q: "What was the primary reason for the Viking raids on monasteries?", a: ["To gain wealth and resources", "To spread Christianity", "To build alliances", "To establish trade routes"], correct: 0 },
+    { q: "Which year marked the beginning of Norman rule in England?", a: ["1066", "865", "871", "924"], correct: 0 }
+  ],
+
   "Dynamic Dynasties": [
     { q: "What is a dynasty?", a: ["A group of soldiers", "A kind of Chinese house", "A family that rules for a long time", "A type of government official"], correct: 2 },
     { q: "Which dynasty is the earliest with recorded history in China?", a: ["Qin", "Zhou", "Shang", "Han"], correct: 2 },
