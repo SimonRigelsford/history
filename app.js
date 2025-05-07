@@ -113,5 +113,4 @@ function nextQuestion() {
     }
 }
 
-
 window.onload = loadQuizzes;
