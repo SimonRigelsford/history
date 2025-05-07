@@ -238,7 +238,9 @@ function startQuiz(name) {
     document.getElementById("quiz-title").textContent = name;
     document.getElementById("quiz-list").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
-    document.getElementById("restart-button").style.display = "none"; // Hide restart button
+    document.getElementById("restart-button").style.display = "none";
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("score").textContent = "";
     updateProgress();
     showQuestion();
 }
@@ -258,7 +260,7 @@ function showQuestion() {
         answersDiv.appendChild(button);
     });
 
-    updateProgress(); // Update progress bar for each question
+    updateProgress();
 }
 
 // Check if the selected answer is correct
@@ -267,7 +269,6 @@ function checkAnswer(selected, button) {
     const feedback = document.getElementById("feedback");
     const buttons = document.querySelectorAll("#answers button");
 
-    // Disable all answer buttons after selection
     buttons.forEach((btn, index) => {
         btn.disabled = true;
         if (index === correct) {
@@ -277,7 +278,6 @@ function checkAnswer(selected, button) {
         }
     });
 
-    // Update feedback message
     if (selected === correct) {
         score++;
         feedback.textContent = "Correct!";
@@ -285,7 +285,7 @@ function checkAnswer(selected, button) {
         feedback.textContent = `Wrong! Correct answer: ${currentQuiz[currentQuestion].a[correct]}`;
     }
 
-    updateProgress(); // Update progress after answering
+    updateProgress();
 }
 
 // Move to the next question or end the quiz
@@ -297,7 +297,6 @@ function nextQuestion() {
         feedback.textContent = "";
         showQuestion();
     } else {
-        // Show the final score and restart option
         feedback.textContent = "";
         if (score === currentQuiz.length) {
             document.getElementById("score").textContent = `Perfect! You scored ${score} / ${currentQuiz.length}! 🎉`;
@@ -308,21 +307,21 @@ function nextQuestion() {
     }
 }
 
-// Restart the current quiz
+// Restart the current quiz correctly
 function restartQuiz() {
-    currentQuestion = 0;
-    score = 0;
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("quiz-list").style.display = "block";
     document.getElementById("score").textContent = "";
-    document.getElementById("restart-button").style.display = "none"; // Hide restart button
-    startQuiz(currentQuiz);
+    document.getElementById("feedback").textContent = "";
+    loadQuizzes();
 }
 
 // Update the progress bar
 function updateProgress() {
-    const progress = ((currentQuestion + 1) / currentQuiz.length) * 100;
+    const progress = ((currentQuestion) / currentQuiz.length) * 100;
     const progressBar = document.getElementById("progress-bar");
     progressBar.style.width = progress + "%";
 }
 
-// Load quizzes when the window loads
+// Load quizzes on page load
 window.onload = loadQuizzes;
