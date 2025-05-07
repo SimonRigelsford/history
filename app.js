@@ -21,7 +21,6 @@ const quizzes = {
     { q: "What does a monarch do?", a: ["Sells books", "Rules a kingdom", "Plays football", "Bakes cakes"], correct: 1 },
     { q: "What kind of person is Greta Thunberg?", a: ["A queen", "A musician", "A climate change activist", "A tennis player"], correct: 2 }
   ],
-
   "Magnificent Monarchs": [
     { q: "What is a monarch?", a: ["A builder", "A king or queen", "A soldier", "A shopkeeper"], correct: 1 },
     { q: "What is a monarchy?", a: ["A country with no rules", "A country ruled by a king or queen", "A type of castle", "A party"], correct: 1 },
@@ -66,7 +65,6 @@ const quizzes = {
     { q: "When did the Romans invade Britain?", a: ["AD 43", "500 BC", "1000 BC", "AD 1000"], correct: 0 },
     { q: "What is a sacrifice?", a: ["A type of ancient food", "A game from the Iron Age", "An animal or person given to the gods", "A big festival"], correct: 2 }
   ],
-
   "Ancient Civilisations": [
     { q: "What is a civilisation?", a: ["A group of animals", "A developed society with cities, inventions and leadership", "A type of farming tool", "A building made of mud"], correct: 1 },
     { q: "What is the Fertile Crescent?", a: ["A river in Egypt", "A type of crop", "An area where the first civilisations began", "A mountain in Asia"], correct: 2 },
@@ -111,7 +109,6 @@ const quizzes = {
     { q: "What replaced bronze during the Zhou Dynasty?", a: ["Jade", "Steel", "Plastic", "Iron"], correct: 3 },
     { q: "What long wall did the Qin Dynasty begin building?", a: ["Wall of Peace", "Imperial Border", "Great Wall of China", "Bamboo Wall"], correct: 2 }
   ],
-
   "Groundbreaking Greeks": [
     { q: "What was the land of ancient Greece mostly made up of?", a: ["Deserts and forests", "Mountains and sea", "Flat fields and rivers", "Jungles and lakes"], correct: 1 },
     { q: "What is a city state (polis)?", a: ["A city ruled by kings", "A city that was part of one big country", "A city and its surrounding land with its own government", "A building in the middle of a city"], correct: 2 },
@@ -134,7 +131,6 @@ const quizzes = {
     { q: "What shaped much of the design and layout of ancient Greek cities?", a: ["Their rivers", "Their kings", "Their connection to the sea", "Their forests"], correct: 2 },
     { q: "What lasting idea from Greek philosophy is still used in schools today?", a: ["Memorisation", "Dictation", "Socratic method (asking questions)", "Reading from scrolls"], correct: 2 }
   ],
-
   "Britain at War": [
     { q: "When did the First World War end?", a: ["11th November 1918", "28th June 1914", "2nd September 1945", "6th June 1944"], correct: 0 },
     { q: "What event triggered the First World War?", a: ["Bombing of London", "Sinking of American ships", "Assassination of Archduke Franz Ferdinand", "Germany invading France"], correct: 2 },
@@ -157,7 +153,6 @@ const quizzes = {
     { q: "What is conscription?", a: ["Raising taxes for war", "Volunteering to fight", "Being forced by law to join the military", "Travelling abroad"], correct: 2 },
     { q: "What was created in Britain after WW2?", a: ["Red Cross", "League of Nations", "The NHS", "British Army"], correct: 2 }
   ],
-
   "Maafa": [
     { q: "What does the word Maafa mean?", a: ["Freedom", "Great catastrophe", "Journey", "New world"], correct: 1 },
     { q: "How many countries are there in Africa?", a: ["45", "50", "54", "60"], correct: 2 },
@@ -182,6 +177,12 @@ const quizzes = {
   ]
 };
 
+// app.js
+
+const quizzes = {
+  // (The entire quizzes object you uploaded goes here)
+};
+
 let currentQuiz = null;
 let currentQuestion = 0;
 let score = 0;
@@ -189,15 +190,17 @@ let score = 0;
 function loadQuizzes() {
     const quizList = document.getElementById("quiz-list");
     quizList.innerHTML = ""; // Clear any previous content
-    for (const quizName in quizzes) {
-        if (quizzes.hasOwnProperty(quizName)) { // Check if the property belongs to quizzes
+    try {
+        Object.keys(quizzes).forEach((quizName) => {
             const button = document.createElement("button");
             button.textContent = quizName;
             button.onclick = () => startQuiz(quizName);
             quizList.appendChild(button);
-        }
+        });
+        console.log("Loaded quizzes:", Object.keys(quizzes)); // Debugging log
+    } catch (error) {
+        console.error("Error loading quizzes:", error);
     }
-    console.log("Loaded quizzes:", Object.keys(quizzes)); // Debugging log
 }
 
 function startQuiz(name) {
