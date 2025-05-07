@@ -96,7 +96,11 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Back button specific styling */
+/* Next button and Back button */
+#next-button {
+    display: block;
+}
+
 #back-button {
     display: none;
 }

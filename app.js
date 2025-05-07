@@ -238,7 +238,8 @@ function startQuiz(name) {
     document.getElementById("quiz-title").textContent = name;
     document.getElementById("quiz-list").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
-    document.getElementById("back-button").style.display = "none"; 
+    document.getElementById("next-button").style.display = "block"; // Show next button initially
+    document.getElementById("back-button").style.display = "none"; // Hide back button initially
     document.getElementById("feedback").textContent = "";
     document.getElementById("score").textContent = "";
     updateProgress();
@@ -303,7 +304,8 @@ function nextQuestion() {
         } else {
             document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
         }
-        document.getElementById("back-button").style.display = "block";
+        document.getElementById("next-button").style.display = "none";  // Hide next button at the end
+        document.getElementById("back-button").style.display = "block"; // Show back button at the end
     }
 }
 
