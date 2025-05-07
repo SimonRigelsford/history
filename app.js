@@ -1,5 +1,5 @@
-window.onload = function () {
-  const quizzes = {
+// app.js
+const quizzes = {
   "Movers and Shakers": [
     { q: "What is a “significant” person?", a: ["A person who is very funny", "A person who is important and made changes", "A person who is good at maths", "A person who owns a shop"], correct: 1 },
     { q: "What did Joseph Lister help stop in hospitals?", a: ["People getting bored", "Long waits", "Infections", "Loud noises"], correct: 2 },
@@ -182,93 +182,65 @@ window.onload = function () {
     { q: "What is a plantation?", a: ["Type of ship", "Trade fort", "Farm for crops like sugar", "Place where enslaved people were freed"], correct: 2 }
   ]
 };
-  const app = document.getElementById("app");
-  const mainMenu = document.getElementById("main-menu");
-  const quizScreen = document.getElementById("quiz-screen");
-  const scoreScreen = document.getElementById("score-screen");
-  const quizList = document.getElementById("quiz-list");
-  const quizTitle = document.getElementById("quiz-title");
-  const questionText = document.getElementById("question-text");
-  const answerButtons = document.getElementById("answer-buttons");
-  const feedback = document.getElementById("feedback");
-  const finalScore = document.getElementById("final-score");
-  const retakeBtn = document.getElementById("retake-btn");
-  const menuBtn = document.getElementById("menu-btn");
 
-  let currentQuiz = [];
-  let currentTitle = "";
-  let currentQuestion = 0;
-  let score = 0;
+let currentQuiz = null;
+let currentQuestion = 0;
+let score = 0;
 
-  function showScreen(screen) {
-    document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
-    screen.classList.remove("hidden");
-  }
+function loadQuizzes() {
+    const quizList = document.getElementById("quiz-list");
+    for (const quizName in quizzes) {
+        const button = document.createElement("button");
+        button.textContent = quizName;
+        button.onclick = () => startQuiz(quizName);
+        quizList.appendChild(button);
+    }
+}
 
-  function loadMainMenu() {
-    quizList.innerHTML = "";
-    Object.keys(quizzes).forEach(title => {
-      const btn = document.createElement("button");
-      btn.textContent = title;
-      btn.setAttribute("type", "button");
-      btn.addEventListener("click", () => startQuiz(title));
-      quizList.appendChild(btn);
-    });
-    showScreen(mainMenu);
-  }
-
-  function startQuiz(title) {
-    currentQuiz = quizzes[title];
-    currentTitle = title;
+function startQuiz(name) {
+    currentQuiz = quizzes[name];
     currentQuestion = 0;
     score = 0;
-    quizTitle.textContent = title;
-    showScreen(quizScreen);
+    document.getElementById("quiz-title").textContent = name;
+    document.getElementById("quiz-list").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
     showQuestion();
-  }
+}
 
-  function showQuestion() {
-    const question = currentQuiz[currentQuestion];
-    questionText.textContent = question.q;
-    answerButtons.innerHTML = "";
-    feedback.classList.add("hidden");
-
-    question.a.forEach((answer, index) => {
-      const btn = document.createElement("button");
-      btn.textContent = answer;
-      btn.onclick = () => checkAnswer(index);
-      answerButtons.appendChild(btn);
+function showQuestion() {
+    const questionObj = currentQuiz[currentQuestion];
+    document.getElementById("question").textContent = questionObj.q;
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+    questionObj.a.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.onclick = () => checkAnswer(index);
+        answersDiv.appendChild(button);
     });
-  }
+}
 
-  function checkAnswer(selected) {
-    const correctIndex = currentQuiz[currentQuestion].correct;
-    feedback.classList.remove("hidden");
-    if (selected === correctIndex) {
-      feedback.textContent = "✅ Correct!";
-      score++;
+function checkAnswer(selected) {
+    const correct = currentQuiz[currentQuestion].correct;
+    const feedback = document.getElementById("feedback");
+    if (selected === correct) {
+        score++;
+        feedback.textContent = "Correct!";
     } else {
-      feedback.textContent = `❌ Wrong! The correct answer was: ${currentQuiz[currentQuestion].a[correctIndex]}`;
+        feedback.textContent = `Wrong! Correct answer: ${currentQuiz[currentQuestion].a[correct]}`;
     }
+}
 
-    setTimeout(() => {
-      currentQuestion++;
-      if (currentQuestion < currentQuiz.length) {
+function nextQuestion() {
+    currentQuestion++;
+    const feedback = document.getElementById("feedback");
+    if (currentQuestion < currentQuiz.length) {
+        feedback.textContent = "";
         showQuestion();
-      } else {
-        showFinalScore();
-      }
-    }, 2000);
-  }
+    } else {
+        feedback.textContent = "";
+        document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
+    }
+}
 
-  function showFinalScore() {
-    finalScore.textContent = `You scored ${score} out of ${currentQuiz.length}!`;
-    showScreen(scoreScreen);
-  }
-
-  retakeBtn.addEventListener("click", () => startQuiz(currentTitle));
-  menuBtn.addEventListener("click", loadMainMenu);
-
-  // 👇 Load the quiz menu right after the page finishes loading
-  loadMainMenu();
-};
+window.onload = loadQuizzes;

@@ -1,123 +1,52 @@
 /* style.css */
-
-#quiz-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 10px;
-}
-
-
-#main-menu {
-  display: block !important;
-}
-
 body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background-color: #f0f8ff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  color: #333;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
-#app {
-  width: 100%;
-  max-width: 600px;
-  padding: 20px;
-  box-sizing: border-box;
+h1 {
+    color: #333;
 }
 
-.screen {
-  display: none;
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+#quiz-container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.screen h1, .screen h2 {
-  text-align: center;
-  color: #333;
+button {
+    background-color: #008cba;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#quiz-list button {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  font-size: 1.1rem;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+button:hover {
+    background-color: #005f75;
 }
 
-#quiz-list button:hover {
-  background-color: #45a049;
-}
-
-#question-text {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-#answer-buttons button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  font-size: 1rem;
-  background-color: #f4f4f4;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#answer-buttons button:hover {
-  background-color: #ddd;
+#answers button {
+    display: block;
+    margin: 5px auto;
+    width: 100%;
 }
 
 #feedback {
-  margin-top: 20px;
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.1rem;
+    margin-top: 10px;
+    color: green;
 }
 
-button#retake-btn, button#menu-btn {
-  width: 48%;
-  padding: 12px;
-  margin: 10px 1%;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#retake-btn {
-  background-color: #2196F3;
-  color: white;
-}
-
-#menu-btn {
-  background-color: #f44336;
-  color: white;
-}
-
-.hidden {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  #answer-buttons button,
-  #quiz-list button,
-  #retake-btn, #menu-btn {
-    font-size: 1rem;
-    padding: 12px;
-  }
+#score {
+    margin-top: 10px;
+    font-weight: bold;
 }
