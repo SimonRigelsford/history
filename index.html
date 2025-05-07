@@ -8,9 +8,9 @@
 </head>
 <body>
     <div id="app">
-        <h1>History Quiz</h1>
+        <h1>Quiz Website</h1>
         <div id="quiz-list" class="quiz-list">
-            <!-- Quiz list will be dynamically loaded here -->
+            <!-- Dynamically generated quiz buttons will appear here -->
         </div>
 
         <div id="quiz-container" class="quiz-container" style="display: none;">
@@ -22,8 +22,7 @@
             <div id="answers" class="answers"></div>
             <p id="feedback" class="feedback"></p>
             <p id="score" class="score"></p>
-            <button id="next-button" class="control-button" onclick="nextQuestion()">Next</button>
-            <button id="restart-button" class="control-button" onclick="restartQuiz()">Restart Quiz</button>
+            <button id="back-button" class="control-button" onclick="backToMainMenu()" style="display: none;">Back to Main Menu</button>
         </div>
     </div>
     <script src="app.js"></script>

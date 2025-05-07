@@ -238,7 +238,7 @@ function startQuiz(name) {
     document.getElementById("quiz-title").textContent = name;
     document.getElementById("quiz-list").style.display = "none";
     document.getElementById("quiz-container").style.display = "block";
-    document.getElementById("restart-button").style.display = "none";
+    document.getElementById("back-button").style.display = "none"; 
     document.getElementById("feedback").textContent = "";
     document.getElementById("score").textContent = "";
     updateProgress();
@@ -303,12 +303,12 @@ function nextQuestion() {
         } else {
             document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
         }
-        document.getElementById("restart-button").style.display = "block";
+        document.getElementById("back-button").style.display = "block";
     }
 }
 
-// Restart the current quiz correctly
-function restartQuiz() {
+// Return to the main menu
+function backToMainMenu() {
     document.getElementById("quiz-container").style.display = "none";
     document.getElementById("quiz-list").style.display = "block";
     document.getElementById("score").textContent = "";
