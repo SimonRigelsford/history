@@ -102,14 +102,14 @@ function nextQuestion() {
         feedback.textContent = "";
         showQuestion();
     } else {
-        feedback.textContent = "";
-        document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
-        // Reset the quiz after completion
+        feedback.textContent = `Your final score: ${score} / ${currentQuiz.length}`;
+        document.getElementById("answers").innerHTML = "";
+        // Return to quiz list after showing the score for a few seconds
         setTimeout(() => {
             document.getElementById("quiz-container").style.display = "none";
             document.getElementById("quiz-list").style.display = "block";
             document.getElementById("score").textContent = "";
-        }, 3000); // Show score for 3 seconds before returning to quiz list
+        }, 3000); // Show score for 3 seconds
     }
 }
 
