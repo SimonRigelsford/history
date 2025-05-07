@@ -21,6 +21,7 @@ const quizzes = {
     { q: "What does a monarch do?", a: ["Sells books", "Rules a kingdom", "Plays football", "Bakes cakes"], correct: 1 },
     { q: "What kind of person is Greta Thunberg?", a: ["A queen", "A musician", "A climate change activist", "A tennis player"], correct: 2 }
   ],
+
   "Magnificent Monarchs": [
     { q: "What is a monarch?", a: ["A builder", "A king or queen", "A soldier", "A shopkeeper"], correct: 1 },
     { q: "What is a monarchy?", a: ["A country with no rules", "A country ruled by a king or queen", "A type of castle", "A party"], correct: 1 },
@@ -65,6 +66,7 @@ const quizzes = {
     { q: "When did the Romans invade Britain?", a: ["AD 43", "500 BC", "1000 BC", "AD 1000"], correct: 0 },
     { q: "What is a sacrifice?", a: ["A type of ancient food", "A game from the Iron Age", "An animal or person given to the gods", "A big festival"], correct: 2 }
   ],
+
   "Ancient Civilisations": [
     { q: "What is a civilisation?", a: ["A group of animals", "A developed society with cities, inventions and leadership", "A type of farming tool", "A building made of mud"], correct: 1 },
     { q: "What is the Fertile Crescent?", a: ["A river in Egypt", "A type of crop", "An area where the first civilisations began", "A mountain in Asia"], correct: 2 },
@@ -109,6 +111,7 @@ const quizzes = {
     { q: "What replaced bronze during the Zhou Dynasty?", a: ["Jade", "Steel", "Plastic", "Iron"], correct: 3 },
     { q: "What long wall did the Qin Dynasty begin building?", a: ["Wall of Peace", "Imperial Border", "Great Wall of China", "Bamboo Wall"], correct: 2 }
   ],
+
   "Groundbreaking Greeks": [
     { q: "What was the land of ancient Greece mostly made up of?", a: ["Deserts and forests", "Mountains and sea", "Flat fields and rivers", "Jungles and lakes"], correct: 1 },
     { q: "What is a city state (polis)?", a: ["A city ruled by kings", "A city that was part of one big country", "A city and its surrounding land with its own government", "A building in the middle of a city"], correct: 2 },
@@ -131,6 +134,7 @@ const quizzes = {
     { q: "What shaped much of the design and layout of ancient Greek cities?", a: ["Their rivers", "Their kings", "Their connection to the sea", "Their forests"], correct: 2 },
     { q: "What lasting idea from Greek philosophy is still used in schools today?", a: ["Memorisation", "Dictation", "Socratic method (asking questions)", "Reading from scrolls"], correct: 2 }
   ],
+
   "Britain at War": [
     { q: "When did the First World War end?", a: ["11th November 1918", "28th June 1914", "2nd September 1945", "6th June 1944"], correct: 0 },
     { q: "What event triggered the First World War?", a: ["Bombing of London", "Sinking of American ships", "Assassination of Archduke Franz Ferdinand", "Germany invading France"], correct: 2 },
@@ -153,6 +157,7 @@ const quizzes = {
     { q: "What is conscription?", a: ["Raising taxes for war", "Volunteering to fight", "Being forced by law to join the military", "Travelling abroad"], correct: 2 },
     { q: "What was created in Britain after WW2?", a: ["Red Cross", "League of Nations", "The NHS", "British Army"], correct: 2 }
   ],
+
   "Maafa": [
     { q: "What does the word Maafa mean?", a: ["Freedom", "Great catastrophe", "Journey", "New world"], correct: 1 },
     { q: "How many countries are there in Africa?", a: ["45", "50", "54", "60"], correct: 2 },
@@ -175,17 +180,18 @@ const quizzes = {
     { q: "Who was Claudia Jones?", a: ["Poet", "Queen", "Abolitionist", "Activist and founder of Notting Hill Carnival"], correct: 3 },
     { q: "What is a plantation?", a: ["Type of ship", "Trade fort", "Farm for crops like sugar", "Place where enslaved people were freed"], correct: 2 }
   ]
-
 };
-
+// Initialize variables
 let currentQuiz = null;
 let currentQuestion = 0;
 let score = 0;
 
+// Function to load all quizzes
 function loadQuizzes() {
     const quizList = document.getElementById("quiz-list");
     quizList.innerHTML = ""; // Clear any previous content
     try {
+        // Iterate over each quiz name and create a button for it
         Object.keys(quizzes).forEach((quizName) => {
             const button = document.createElement("button");
             button.textContent = quizName;
@@ -198,21 +204,25 @@ function loadQuizzes() {
     }
 }
 
+// Function to start a quiz when a quiz name button is clicked
 function startQuiz(name) {
-    currentQuiz = quizzes[name];
+    currentQuiz = quizzes[name]; // Get the selected quiz
     currentQuestion = 0;
     score = 0;
-    document.getElementById("quiz-title").textContent = name;
-    document.getElementById("quiz-list").style.display = "none";
-    document.getElementById("quiz-container").style.display = "block";
+    document.getElementById("quiz-title").textContent = name; // Display quiz title
+    document.getElementById("quiz-list").style.display = "none"; // Hide quiz list
+    document.getElementById("quiz-container").style.display = "block"; // Show quiz container
     showQuestion();
 }
 
+// Function to display a question and its answer options
 function showQuestion() {
-    const questionObj = currentQuiz[currentQuestion];
-    document.getElementById("question").textContent = questionObj.q;
+    const questionObj = currentQuiz[currentQuestion]; // Get current question object
+    document.getElementById("question").textContent = questionObj.q; // Display question text
     const answersDiv = document.getElementById("answers");
-    answersDiv.innerHTML = "";
+    answersDiv.innerHTML = ""; // Clear previous answers
+
+    // Create answer buttons dynamically
     questionObj.a.forEach((answer, index) => {
         const button = document.createElement("button");
         button.textContent = answer;
@@ -221,26 +231,37 @@ function showQuestion() {
     });
 }
 
+// Function to check if the selected answer is correct
 function checkAnswer(selected) {
-    const correct = currentQuiz[currentQuestion].correct;
+    const correct = currentQuiz[currentQuestion].correct; // Get correct answer index
     const feedback = document.getElementById("feedback");
+
+    // Update feedback based on whether the answer was correct
     if (selected === correct) {
         score++;
         feedback.textContent = "Correct!";
+        feedback.style.color = "green";
     } else {
         feedback.textContent = `Wrong! Correct answer: ${currentQuiz[currentQuestion].a[correct]}`;
+        feedback.style.color = "red";
     }
 }
 
+// Function to move to the next question or end the quiz
 function nextQuestion() {
-    currentQuestion++;
+    currentQuestion++; // Increment the question index
     const feedback = document.getElementById("feedback");
+
+    // Check if there are more questions
     if (currentQuestion < currentQuiz.length) {
-        feedback.textContent = "";
-        showQuestion();
+        feedback.textContent = ""; // Clear feedback
+        showQuestion(); // Show next question
     } else {
+        // Display final score
         feedback.textContent = "";
         document.getElementById("score").textContent = `Your score: ${score} / ${currentQuiz.length}`;
+        
+        // Return to the quiz list after a delay
         setTimeout(() => {
             document.getElementById("quiz-container").style.display = "none";
             document.getElementById("quiz-list").style.display = "block";
@@ -249,4 +270,6 @@ function nextQuestion() {
     }
 }
 
+// Run the function to load quizzes when the window loads
 window.onload = loadQuizzes;
+
